@@ -39,156 +39,156 @@ import org.apache.commons.logging.LogFactory;
 /**
  * An {@link AdvancedProperties} class constructed over a file.
  * 
- * @author Cristian Sulea ( http://cristian.sulea.net )
- * @version 2.1, January 23, 2014
+ * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
+ * @version 2.2, June 26, 2014
  */
 @SuppressWarnings("serial")
 public class FileProperties extends AdvancedProperties {
 
-	private final Log logger = LogFactory.getLog(getClass());
+  private final Log logger = LogFactory.getLog(getClass());
 
-	private File file;
+  private File file;
 
-	private Cipher cipherEncrypt;
-	private Cipher cipherDecrypt;
+  private Cipher cipherEncrypt;
+  private Cipher cipherDecrypt;
 
-	public FileProperties(File file) {
-		this.file = file;
-	}
+  public FileProperties(File file) {
+    this.file = file;
+  }
 
-	public FileProperties(File file, Key key) throws GeneralSecurityException {
+  public FileProperties(File file, Key key) throws GeneralSecurityException {
 
-		this.file = file;
+    this.file = file;
 
-		cipherEncrypt = Cipher.getInstance("AES/ECB/PKCS5Padding");
-		cipherEncrypt.init(Cipher.ENCRYPT_MODE, key);
+    cipherEncrypt = Cipher.getInstance("AES/ECB/PKCS5Padding");
+    cipherEncrypt.init(Cipher.ENCRYPT_MODE, key);
 
-		cipherDecrypt = Cipher.getInstance("AES/ECB/PKCS5Padding");
-		cipherDecrypt.init(Cipher.DECRYPT_MODE, key);
-	}
+    cipherDecrypt = Cipher.getInstance("AES/ECB/PKCS5Padding");
+    cipherDecrypt.init(Cipher.DECRYPT_MODE, key);
+  }
 
-	public FileProperties(File file, String passphrase) throws GeneralSecurityException {
-		this(file, generateKey(passphrase));
-	}
+  public FileProperties(File file, String passphrase) throws GeneralSecurityException {
+    this(file, generateKey(passphrase));
+  }
 
-	public FileProperties(String filename) {
-		this(new File(filename));
-	}
+  public FileProperties(String filename) {
+    this(new File(filename));
+  }
 
-	public FileProperties(String filename, Key key) throws GeneralSecurityException {
-		this(new File(filename), key);
-	}
+  public FileProperties(String filename, Key key) throws GeneralSecurityException {
+    this(new File(filename), key);
+  }
 
-	public FileProperties(String filename, String passphrase) throws GeneralSecurityException {
-		this(new File(filename), passphrase);
-	}
+  public FileProperties(String filename, String passphrase) throws GeneralSecurityException {
+    this(new File(filename), passphrase);
+  }
 
-	public synchronized FileProperties save() throws IOException {
+  public synchronized FileProperties save() throws IOException {
 
-		//
-		// ensure the parent directories
+    //
+    // ensure the parent directories
 
-		file.getAbsoluteFile().getParentFile().mkdirs();
+    file.getAbsoluteFile().getParentFile().mkdirs();
 
-		//
-		// save
+    //
+    // save
 
-		OutputStream stream = null;
+    OutputStream stream = null;
 
-		try {
+    try {
 
-			stream = new FileOutputStream(file);
+      stream = new FileOutputStream(file);
 
-			if (cipherEncrypt != null) {
-				stream = new CipherOutputStream(stream, cipherEncrypt);
-			}
+      if (cipherEncrypt != null) {
+        stream = new CipherOutputStream(stream, cipherEncrypt);
+      }
 
-			store(stream, null);
-		}
+      store(stream, null);
+    }
 
-		catch (IOException e) {
-			throw e;
-		}
+    catch (IOException e) {
+      throw e;
+    }
 
-		finally {
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (IOException e) {}
-			}
-		}
+    finally {
+      if (stream != null) {
+        try {
+          stream.close();
+        } catch (IOException e) {}
+      }
+    }
 
-		return this;
-	}
+    return this;
+  }
 
-	public FileProperties saveSilently() {
+  public FileProperties saveSilently() {
 
-		try {
-			save();
-		}
+    try {
+      save();
+    }
 
-		catch (IOException e) {
-			logger.warn("failed to save properties", e);
-		}
+    catch (IOException e) {
+      logger.warn("failed to save properties", e);
+    }
 
-		return this;
-	}
+    return this;
+  }
 
-	public synchronized FileProperties load() throws IOException {
+  public synchronized FileProperties load() throws IOException {
 
-		InputStream stream = null;
+    InputStream stream = null;
 
-		try {
+    try {
 
-			stream = new FileInputStream(file);
+      stream = new FileInputStream(file);
 
-			if (cipherDecrypt != null) {
-				stream = new CipherInputStream(stream, cipherDecrypt);
-			}
+      if (cipherDecrypt != null) {
+        stream = new CipherInputStream(stream, cipherDecrypt);
+      }
 
-			load(stream);
-		}
+      load(stream);
+    }
 
-		catch (IOException e) {
-			throw e;
-		}
+    catch (IOException e) {
+      throw e;
+    }
 
-		finally {
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (IOException e) {}
-			}
-		}
+    finally {
+      if (stream != null) {
+        try {
+          stream.close();
+        } catch (IOException e) {}
+      }
+    }
 
-		return this;
-	}
+    return this;
+  }
 
-	public FileProperties loadSilently() {
+  public FileProperties loadSilently() {
 
-		if (file.exists()) {
+    if (file.exists()) {
 
-			try {
-				load();
-			}
+      try {
+        load();
+      }
 
-			catch (IOException e) {
-				logger.warn("failed to load properties", e);
-			}
-		}
+      catch (IOException e) {
+        logger.warn("failed to load properties", e);
+      }
+    }
 
-		return this;
-	}
+    return this;
+  }
 
-	//
-	//
+  //
+  //
 
-	private static final Key generateKey(String passphrase) throws NoSuchAlgorithmException {
+  private static final Key generateKey(String passphrase) throws NoSuchAlgorithmException {
 
-		MessageDigest digest = MessageDigest.getInstance("SHA");
-		digest.update(passphrase.getBytes());
+    MessageDigest digest = MessageDigest.getInstance("SHA");
+    digest.update(passphrase.getBytes());
 
-		return new SecretKeySpec(digest.digest(), 0, 16, "AES");
-	}
+    return new SecretKeySpec(digest.digest(), 0, 16, "AES");
+  }
 
 }

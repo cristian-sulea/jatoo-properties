@@ -24,8 +24,8 @@ import java.util.Properties;
 /**
  * An advanced {@link Properties} class.
  * 
- * @author Cristian Sulea ( http://cristian.sulea.net )
- * @version 4.1, December 4, 2013
+ * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
+ * @version 4.2, June 26, 2014
  */
 @SuppressWarnings("serial")
 public class AdvancedProperties extends Properties {
