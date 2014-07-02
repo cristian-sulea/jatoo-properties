@@ -15,7 +15,7 @@
 
 
 	<name>JaToo Properties</name>
-	<description>JaToo Properties - a Java Open Source library created to ease the work with Properties objects.</description>
+	<description>A Java Open Source library created to ease the work with Properties objects.</description>
 	<url>http://cristian.sulea.net/projects/jatoo-properties/</url>
 
 	<inceptionYear>2011</inceptionYear>
