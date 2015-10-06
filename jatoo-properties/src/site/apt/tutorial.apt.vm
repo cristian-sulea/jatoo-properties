@@ -1,0 +1,69 @@
+	-----
+	${project.description}
+	-----
+	Cristian Sulea
+	-----
+	2015-10-06
+	-----
+
+
+Tutorial
+
+
+* AdvancedProperties
+	
+	Set and retrieve various types, primitives or not. 
+
++--
+AdvancedProperties p = new AdvancedProperties();
+
+p.setProperty("string", "string");
+p.setProperty("int", 1);
+p.setProperty("boolean", true);
+p.setProperty("point", new Point(1, 1));
+p.setProperty("dimension", new Dimension(1, 1));
+p.setProperty("class", getClass());
+p.setProperty("color", Color.RED);
+
+String s = p.getPropertyAsString("string");
+int i = p.getPropertyAsInt("int");
+boolean b = p.getPropertyAsBoolean("boolean");
+Point point = p.getPropertyAsPoint("point");
+Dimension dimension = p.getPropertyAsDimension("dimension");
+Class class = p.getPropertyAsClass("class");
+Color color = p.getPropertyAsColor("color");
++--
+
+
+* FileProperties
+	
+	Save the properties.
+
++--
+FileProperties p = new FileProperties(new File("file.properties"));
+
+p.setProperty("key-int", 1);
+p.setProperty("key-dimension", new Dimension(1, 1));
+p.setProperty("key-color", Color.RED);
+
+p.save();
+
+The content of the "file.properties" is:
+
+#Tue Oct 06 15:31:57 EEST 2015
+key-int=1
+key-dimension=1,1
+key-color=255,0,0,255
++--
+
+	Load the properties.
+
++--
+FileProperties p = new FileProperties(new File("file.properties"));
+p.load();
+
+int i = p.getPropertyAsInt("key-int");
+Dimension d = p.getPropertyAsDimension("key-dimension");
+Color c = p.getPropertyAsColor("key-color");
++--
+
