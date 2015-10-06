@@ -46,7 +46,7 @@ public class AdvancedProperties extends Properties {
     return (String) super.setProperty(key, value);
   }
 
-  public final String getPropertyAsString(final String key) throws Throwable {
+  public final String getPropertyAsString(final String key) throws NullPointerException {
     return getPropertyNotNull(key);
   }
 
@@ -66,7 +66,7 @@ public class AdvancedProperties extends Properties {
     setProperty(key, Integer.toString(value));
   }
 
-  public final int getPropertyAsInt(final String key) throws Throwable {
+  public final int getPropertyAsInt(final String key) throws NullPointerException, NumberFormatException {
     return Integer.parseInt(getPropertyNotNull(key));
   }
 
@@ -86,7 +86,7 @@ public class AdvancedProperties extends Properties {
     setProperty(key, Boolean.toString(value));
   }
 
-  public final boolean getPropertyAsBoolean(final String key) throws Throwable {
+  public final boolean getPropertyAsBoolean(final String key) throws NullPointerException {
     return Boolean.parseBoolean(getPropertyNotNull(key));
   }
 
@@ -106,7 +106,7 @@ public class AdvancedProperties extends Properties {
     setProperty(key, value.x + "," + value.y);
   }
 
-  public final Point getPropertyAsPoint(final String key) throws Throwable {
+  public final Point getPropertyAsPoint(final String key) throws NullPointerException, NumberFormatException {
 
     String value = getPropertyNotNull(key);
     String[] xy = value.split(",");
@@ -130,7 +130,7 @@ public class AdvancedProperties extends Properties {
     setProperty(key, value.width + "," + value.height);
   }
 
-  public final Dimension getPropertyAsDimension(final String key) throws Throwable {
+  public final Dimension getPropertyAsDimension(final String key) throws NullPointerException, NumberFormatException {
 
     String value = getPropertyNotNull(key);
     String[] xy = value.split(",");
@@ -154,7 +154,7 @@ public class AdvancedProperties extends Properties {
     setProperty(key, value.getName());
   }
 
-  public final Class<?> getPropertyAsClass(final String key) throws Throwable {
+  public final Class<?> getPropertyAsClass(final String key) throws NullPointerException, ClassNotFoundException {
     return Class.forName(getPropertyNotNull(key));
   }
 
@@ -174,7 +174,7 @@ public class AdvancedProperties extends Properties {
     setProperty(key, value.getRed() + "," + value.getGreen() + "," + value.getBlue() + "," + value.getAlpha());
   }
 
-  public final Color getPropertyAsColor(final String key) throws Throwable {
+  public final Color getPropertyAsColor(final String key) throws NullPointerException, NumberFormatException, IllegalArgumentException {
 
     String value = getPropertyNotNull(key);
     String[] color = value.split(",");
