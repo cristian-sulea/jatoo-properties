@@ -17,6 +17,7 @@
 
 package jatoo.properties;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.Properties;
@@ -25,7 +26,7 @@ import java.util.Properties;
  * An advanced {@link Properties} class.
  * 
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- * @version 4.2, June 26, 2014
+ * @version 4.3, August 26, 2014
  */
 @SuppressWarnings("serial")
 public class AdvancedProperties extends Properties {
@@ -160,6 +161,30 @@ public class AdvancedProperties extends Properties {
   public Class<?> getPropertyAsClass(String key, Class<?> defaultValue) {
     try {
       return getPropertyAsClass(key);
+    } catch (Throwable t) {
+      return defaultValue;
+    }
+  }
+
+  //
+  // Color
+  //
+
+  public void setProperty(String key, Color value) {
+    setProperty(key, value.getRed() + "," + value.getGreen() + "," + value.getBlue() + "," + value.getAlpha());
+  }
+
+  public Color getPropertyAsColor(String key) throws Throwable {
+
+    String value = getPropertyNotNull(key);
+    String[] color = value.split(",");
+
+    return new Color(Integer.parseInt(color[0]), Integer.parseInt(color[1]), Integer.parseInt(color[2]), Integer.parseInt(color[3]));
+  }
+
+  public Color getPropertyAsColor(String key, Color defaultValue) {
+    try {
+      return getPropertyAsColor(key);
     } catch (Throwable t) {
       return defaultValue;
     }
