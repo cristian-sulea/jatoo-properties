@@ -45,6 +45,7 @@ import org.apache.commons.logging.LogFactory;
 @SuppressWarnings("serial")
 public class FileProperties extends AdvancedProperties {
 
+  /** the logger */
   private final Log logger = LogFactory.getLog(getClass());
 
   private File file;
@@ -114,7 +115,9 @@ public class FileProperties extends AdvancedProperties {
       if (stream != null) {
         try {
           stream.close();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+          logger.warn("failed to close the stream after saving the properties", e);
+        }
       }
     }
 
@@ -157,7 +160,9 @@ public class FileProperties extends AdvancedProperties {
       if (stream != null) {
         try {
           stream.close();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+          logger.warn("failed to close the stream after loading the properties", e);
+        }
       }
     }
 
@@ -183,7 +188,7 @@ public class FileProperties extends AdvancedProperties {
   //
   //
 
-  private static final Key generateKey(final String passphrase) throws NoSuchAlgorithmException {
+  private static Key generateKey(final String passphrase) throws NoSuchAlgorithmException {
 
     MessageDigest digest = MessageDigest.getInstance("SHA");
     digest.update(passphrase.getBytes());
