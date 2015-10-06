@@ -40,7 +40,7 @@ import org.apache.commons.logging.LogFactory;
  * An {@link AdvancedProperties} class constructed over a file.
  * 
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- * @version 2.2, June 26, 2014
+ * @version 2.3, October 6, 2015
  */
 @SuppressWarnings("serial")
 public class FileProperties extends AdvancedProperties {
@@ -56,7 +56,7 @@ public class FileProperties extends AdvancedProperties {
     this.file = file;
   }
 
-  public FileProperties(File file, Key key) throws GeneralSecurityException {
+  public FileProperties(final File file, final Key key) throws GeneralSecurityException {
 
     this.file = file;
 
@@ -67,19 +67,19 @@ public class FileProperties extends AdvancedProperties {
     cipherDecrypt.init(Cipher.DECRYPT_MODE, key);
   }
 
-  public FileProperties(File file, String passphrase) throws GeneralSecurityException {
+  public FileProperties(final File file, final String passphrase) throws GeneralSecurityException {
     this(file, generateKey(passphrase));
   }
 
-  public FileProperties(String filename) {
+  public FileProperties(final String filename) {
     this(new File(filename));
   }
 
-  public FileProperties(String filename, Key key) throws GeneralSecurityException {
+  public FileProperties(final String filename, final Key key) throws GeneralSecurityException {
     this(new File(filename), key);
   }
 
-  public FileProperties(String filename, String passphrase) throws GeneralSecurityException {
+  public FileProperties(final String filename, final String passphrase) throws GeneralSecurityException {
     this(new File(filename), passphrase);
   }
 
@@ -183,7 +183,7 @@ public class FileProperties extends AdvancedProperties {
   //
   //
 
-  private static final Key generateKey(String passphrase) throws NoSuchAlgorithmException {
+  private static final Key generateKey(final String passphrase) throws NoSuchAlgorithmException {
 
     MessageDigest digest = MessageDigest.getInstance("SHA");
     digest.update(passphrase.getBytes());
