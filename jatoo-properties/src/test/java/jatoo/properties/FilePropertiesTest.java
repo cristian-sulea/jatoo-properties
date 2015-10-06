@@ -3,16 +3,19 @@ package jatoo.properties;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-public class AdvancedPropertiesTest {
+public class FilePropertiesTest {
+
+  private static final File FILE = new File("file.properties");
 
   @Test
   public void test() throws Exception {
 
-    AdvancedProperties p = new AdvancedProperties();
+    FileProperties p = new FileProperties(FILE);
 
     p.setProperty("string", "string");
     p.setProperty("int", 1);
@@ -22,6 +25,11 @@ public class AdvancedPropertiesTest {
     p.setProperty("class", getClass());
     p.setProperty("color", Color.RED);
 
+    p.save();
+
+    p = new FileProperties(FILE);
+    p.load();
+
     Assert.assertEquals("string", p.getPropertyAsString("string"));
     Assert.assertEquals(1, p.getPropertyAsInt("int"));
     Assert.assertTrue(p.getPropertyAsBoolean("boolean"));
@@ -29,6 +37,10 @@ public class AdvancedPropertiesTest {
     Assert.assertEquals(new Dimension(1, 1), p.getPropertyAsDimension("dimension"));
     Assert.assertEquals(getClass(), p.getPropertyAsClass("class"));
     Assert.assertEquals(new Color(Color.RED.getRGB()), p.getPropertyAsColor("color"));
+
+    FILE.delete();
+
+    Assert.assertFalse(FILE.exists());
   }
 
 }
