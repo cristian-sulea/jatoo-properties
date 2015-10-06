@@ -29,6 +29,8 @@ public class AdvancedPropertiesTest {
     Assert.assertEquals(new Dimension(1, 1), p.getPropertyAsDimension("dimension"));
     Assert.assertEquals(getClass(), p.getPropertyAsClass("class"));
     Assert.assertEquals(new Color(Color.RED.getRGB()), p.getPropertyAsColor("color"));
+    
+    System.out.println(p);
   }
 
 }
