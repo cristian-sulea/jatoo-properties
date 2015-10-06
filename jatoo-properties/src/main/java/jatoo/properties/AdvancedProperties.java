@@ -42,15 +42,15 @@ public class AdvancedProperties extends Properties {
   //
   // String
 
-  public String setProperty(final String key, final String value) {
+  public final String setProperty(final String key, final String value) {
     return (String) super.setProperty(key, value);
   }
 
-  public String getPropertyAsString(final String key) throws Throwable {
+  public final String getPropertyAsString(final String key) throws Throwable {
     return getPropertyNotNull(key);
   }
 
-  public String getPropertyAsString(final String key, final String defaultValue) {
+  public final String getPropertyAsString(final String key, final String defaultValue) {
     try {
       return getPropertyAsString(key);
     } catch (Throwable t) {
@@ -62,15 +62,15 @@ public class AdvancedProperties extends Properties {
   // int
   //
 
-  public void setProperty(final String key, final int value) {
+  public final void setProperty(final String key, final int value) {
     setProperty(key, Integer.toString(value));
   }
 
-  public int getPropertyAsInt(final String key) throws Throwable {
+  public final int getPropertyAsInt(final String key) throws Throwable {
     return Integer.parseInt(getPropertyNotNull(key));
   }
 
-  public int getPropertyAsInt(final String key, final int defaultValue) {
+  public final int getPropertyAsInt(final String key, final int defaultValue) {
     try {
       return getPropertyAsInt(key);
     } catch (Throwable t) {
@@ -82,15 +82,15 @@ public class AdvancedProperties extends Properties {
   // boolean
   //
 
-  public void setProperty(final String key, final boolean value) {
+  public final void setProperty(final String key, final boolean value) {
     setProperty(key, Boolean.toString(value));
   }
 
-  public boolean getPropertyAsBoolean(final String key) throws Throwable {
+  public final boolean getPropertyAsBoolean(final String key) throws Throwable {
     return Boolean.parseBoolean(getPropertyNotNull(key));
   }
 
-  public boolean getPropertyAsBoolean(final String key, final boolean defaultValue) {
+  public final boolean getPropertyAsBoolean(final String key, final boolean defaultValue) {
     try {
       return getPropertyAsBoolean(key);
     } catch (Throwable t) {
@@ -102,11 +102,11 @@ public class AdvancedProperties extends Properties {
   // Point
   //
 
-  public void setProperty(final String key, final Point value) {
+  public final void setProperty(final String key, final Point value) {
     setProperty(key, value.x + "," + value.y);
   }
 
-  public Point getPropertyAsPoint(final String key) throws Throwable {
+  public final Point getPropertyAsPoint(final String key) throws Throwable {
 
     String value = getPropertyNotNull(key);
     String[] xy = value.split(",");
@@ -114,7 +114,7 @@ public class AdvancedProperties extends Properties {
     return new Point(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]));
   }
 
-  public Point getPropertyAsPoint(final String key, final Point defaultValue) {
+  public final Point getPropertyAsPoint(final String key, final Point defaultValue) {
     try {
       return getPropertyAsPoint(key);
     } catch (Throwable t) {
@@ -126,11 +126,11 @@ public class AdvancedProperties extends Properties {
   // Dimension
   //
 
-  public void setProperty(final String key, final Dimension value) {
+  public final void setProperty(final String key, final Dimension value) {
     setProperty(key, value.width + "," + value.height);
   }
 
-  public Dimension getPropertyAsDimension(final String key) throws Throwable {
+  public final Dimension getPropertyAsDimension(final String key) throws Throwable {
 
     String value = getPropertyNotNull(key);
     String[] xy = value.split(",");
@@ -138,7 +138,7 @@ public class AdvancedProperties extends Properties {
     return new Dimension(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]));
   }
 
-  public Dimension getPropertyAsDimension(final String key, final Dimension defaultValue) {
+  public final Dimension getPropertyAsDimension(final String key, final Dimension defaultValue) {
     try {
       return getPropertyAsDimension(key);
     } catch (Throwable t) {
@@ -150,15 +150,15 @@ public class AdvancedProperties extends Properties {
   // Class
   //
 
-  public void setProperty(final String key, final Class<?> value) {
+  public final void setProperty(final String key, final Class<?> value) {
     setProperty(key, value.getName());
   }
 
-  public Class<?> getPropertyAsClass(final String key) throws Throwable {
+  public final Class<?> getPropertyAsClass(final String key) throws Throwable {
     return Class.forName(getPropertyNotNull(key));
   }
 
-  public Class<?> getPropertyAsClass(final String key, final Class<?> defaultValue) {
+  public final Class<?> getPropertyAsClass(final String key, final Class<?> defaultValue) {
     try {
       return getPropertyAsClass(key);
     } catch (Throwable t) {
@@ -170,11 +170,11 @@ public class AdvancedProperties extends Properties {
   // Color
   //
 
-  public void setProperty(final String key, final Color value) {
+  public final void setProperty(final String key, final Color value) {
     setProperty(key, value.getRed() + "," + value.getGreen() + "," + value.getBlue() + "," + value.getAlpha());
   }
 
-  public Color getPropertyAsColor(final String key) throws Throwable {
+  public final Color getPropertyAsColor(final String key) throws Throwable {
 
     String value = getPropertyNotNull(key);
     String[] color = value.split(",");
@@ -182,7 +182,7 @@ public class AdvancedProperties extends Properties {
     return new Color(Integer.parseInt(color[0]), Integer.parseInt(color[1]), Integer.parseInt(color[2]), Integer.parseInt(color[3]));
   }
 
-  public Color getPropertyAsColor(final String key, final Color defaultValue) {
+  public final Color getPropertyAsColor(final String key, final Color defaultValue) {
     try {
       return getPropertyAsColor(key);
     } catch (Throwable t) {

@@ -53,7 +53,7 @@ public class FileProperties extends AdvancedProperties {
   private Cipher cipherEncrypt;
   private Cipher cipherDecrypt;
 
-  public FileProperties(File file) {
+  public FileProperties(final File file) {
     this.file = file;
   }
 
@@ -88,7 +88,7 @@ public class FileProperties extends AdvancedProperties {
   // save
   //
 
-  public synchronized FileProperties save() throws IOException {
+  public final synchronized FileProperties save() throws IOException {
 
     //
     // ensure the parent directories
@@ -128,7 +128,7 @@ public class FileProperties extends AdvancedProperties {
     return this;
   }
 
-  public FileProperties saveSilently() {
+  public final FileProperties saveSilently() {
 
     try {
       save();
@@ -145,7 +145,7 @@ public class FileProperties extends AdvancedProperties {
   // load
   //
 
-  public synchronized FileProperties load() throws IOException {
+  public final synchronized FileProperties load() throws IOException {
 
     InputStream stream = null;
 
@@ -177,7 +177,7 @@ public class FileProperties extends AdvancedProperties {
     return this;
   }
 
-  public FileProperties loadSilently() {
+  public final FileProperties loadSilently() {
 
     if (file.exists()) {
 
