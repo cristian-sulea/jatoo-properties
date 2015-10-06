@@ -174,7 +174,7 @@ public class AdvancedProperties extends Properties {
     setProperty(key, value.getRed() + "," + value.getGreen() + "," + value.getBlue() + "," + value.getAlpha());
   }
 
-  public final Color getPropertyAsColor(final String key) throws NullPointerException, NumberFormatException, IllegalArgumentException {
+  public final Color getPropertyAsColor(final String key) throws NullPointerException, IllegalArgumentException {
 
     String value = getPropertyNotNull(key);
     String[] color = value.split(",");
