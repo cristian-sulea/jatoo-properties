@@ -88,7 +88,7 @@ public class FileProperties extends AdvancedProperties {
   // save
   //
 
-  public final synchronized FileProperties save() throws IOException {
+  public final FileProperties save() throws IOException {
 
     //
     // ensure the parent directories
@@ -145,7 +145,7 @@ public class FileProperties extends AdvancedProperties {
   // load
   //
 
-  public final synchronized FileProperties load() throws IOException {
+  public final FileProperties load() throws IOException {
 
     InputStream stream = null;
 
