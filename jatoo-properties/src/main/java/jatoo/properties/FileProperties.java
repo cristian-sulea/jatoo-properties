@@ -84,6 +84,10 @@ public class FileProperties extends AdvancedProperties {
     this(new File(filename), passphrase);
   }
 
+  //
+  // save
+  //
+
   public synchronized FileProperties save() throws IOException {
 
     //
@@ -136,6 +140,10 @@ public class FileProperties extends AdvancedProperties {
 
     return this;
   }
+
+  //
+  // load
+  //
 
   public synchronized FileProperties load() throws IOException {
 
