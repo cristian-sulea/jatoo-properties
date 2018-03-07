@@ -107,6 +107,8 @@ public class FileProperties extends AdvancedProperties {
         stream = new CipherOutputStream(stream, cipherEncrypt);
       }
 
+      beforeSave();
+
       store(stream, null);
     }
 
