@@ -39,7 +39,7 @@ import org.apache.commons.logging.LogFactory;
  * An {@link AdvancedProperties} class constructed over a file.
  * 
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- * @version 2.3, October 6, 2015
+ * @version 2.4, March 7, 2018
  */
 @SuppressWarnings("serial")
 public class FileProperties extends AdvancedProperties {
@@ -140,6 +140,8 @@ public class FileProperties extends AdvancedProperties {
     return this;
   }
 
+  protected void beforeSave() {}
+
   //
   // load
   //
@@ -157,6 +159,8 @@ public class FileProperties extends AdvancedProperties {
       }
 
       load(stream);
+
+      afterLoad();
     }
 
     catch (IOException e) {
@@ -191,6 +195,8 @@ public class FileProperties extends AdvancedProperties {
 
     return this;
   }
+
+  protected void afterLoad() {}
 
   //
   //
