@@ -89,6 +89,8 @@ public class FileProperties extends AdvancedProperties {
 
   public final FileProperties save() throws IOException {
 
+    beforeSave();
+
     //
     // ensure the parent directories
 
@@ -106,8 +108,6 @@ public class FileProperties extends AdvancedProperties {
       if (cipherEncrypt != null) {
         stream = new CipherOutputStream(stream, cipherEncrypt);
       }
-
-      beforeSave();
 
       store(stream, null);
     }
@@ -161,8 +161,6 @@ public class FileProperties extends AdvancedProperties {
       }
 
       load(stream);
-
-      afterLoad();
     }
 
     catch (IOException e) {
@@ -170,6 +168,9 @@ public class FileProperties extends AdvancedProperties {
     }
 
     finally {
+
+      afterLoad();
+
       if (stream != null) {
         try {
           stream.close();
@@ -184,15 +185,12 @@ public class FileProperties extends AdvancedProperties {
 
   public final FileProperties loadSilently() {
 
-    if (file.exists()) {
+    try {
+      load();
+    }
 
-      try {
-        load();
-      }
-
-      catch (IOException e) {
-        logger.warn("failed to load properties", e);
-      }
+    catch (IOException e) {
+      logger.warn("failed to load properties", e);
     }
 
     return this;
